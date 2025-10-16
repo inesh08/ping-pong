@@ -3,6 +3,7 @@ from game.game_engine import GameEngine
 
 # Initialize pygame/Start application
 pygame.init()
+pygame.mixer.init(frequency=22050, size=-16, channels=2, buffer=512)
 
 # Screen dimensions
 WIDTH, HEIGHT = 800, 600
@@ -28,7 +29,8 @@ def main():
             if event.type == pygame.QUIT:
                 running = False
 
-        engine.handle_input()
+        if not engine.handle_input():
+            running = False
         engine.update()
         engine.render(SCREEN)
 
